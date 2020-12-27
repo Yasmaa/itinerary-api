@@ -1,0 +1,44 @@
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  datasource:
+    url: jdbc:postgresql://db.travellingfreak.com:5432/db_test
+    username: dev_user
+    password: dev_user
+    driver-class-name: org.postgresql.Driver
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      connection-test-query: SELECT 1
+      minimum-idle: 1
+      maximum-pool-size: 5
+      pool-name: app-pool
+
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+      use-new-id-generator-mappings: true
+      naming:
+        physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
+    generate-ddl: true
+    open-in-view: false
+    database-platform: org.hibernate.dialect.PostgreSQL10Dialect
+    database: postgresql
+    show-sql: true
+    properties:
+      hibernate.format_sql: true
+      hibernate.hbm2ddl.auto: update
+  profiles:
+    active: develop
+logging:
+  level:
+    web: DEBUG
+
+keycloak:
+  auth-server-url: https://idp.travellingfreak.com/auth
+  realm: itinerary
+  resource: login-app
+  public-client: false
+  credentials:
+    secret: 3812919e-77d6-4491-9fb4-eecfaf22e8d0
+
